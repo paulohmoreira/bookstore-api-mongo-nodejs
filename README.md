@@ -7,6 +7,7 @@ O objetivo desse projeto é testar o Node.js com o banco MongoDB e também prati
 - [Node.js](https://nodejs.org/pt) (versão 20.17.0)
 - [Express](https://expressjs.com/) (versão 4.x)
 - [MongoDB](https://www.mongodb.com/) (versão a definir)
+- [Mongoose](https://mongoosejs.com/) (versão 8.7.0)
 
 ## Instalação
 
@@ -26,7 +27,7 @@ O objetivo desse projeto é testar o Node.js com o banco MongoDB e também prati
   *TODO*
 
 ### Configurando e Iniciando o Servidor
-  *TODO*
+  `npm run dev`
 
 ### Endpoints CRUD
 O projeto suporta os seguintes endpoints CRUD:
