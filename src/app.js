@@ -1,12 +1,22 @@
+import "dotenv/config"
 import express from 'express'
+import dbConnect from './config/dbConnection.js'
+import routes from './routes/index.js'
 
-const app = express()
-const port = 3000
+const PORT = 3000
+const conexao = await dbConnect()
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+conexao.on("error", (erro) => {
+  console.error("erro de conexão", erro)
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+conexao.once("open", () => {
+  console.log("Conexão com o banco feita com sucesso")
+})
+
+const app = express()
+routes(app)
+
+app.listen(PORT, () => {
+  console.log("servidor escutando!")
 })
