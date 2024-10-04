@@ -1,6 +1,6 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 const { Schema } = mongoose;
-import { autorSchema } from './Autor.js';
+import { autorSchema } from "./Autor.js";
 
 const livroSchema = new Schema({
   titulo: { type: String, required: true },
@@ -8,8 +8,8 @@ const livroSchema = new Schema({
   preco: Number,
   paginas: Number,
   autor: autorSchema
-})
+});
 
-const Livro = mongoose.model('livros', livroSchema);
+const Livro = mongoose.model("livros", livroSchema);
 
-export default Livro
+export default Livro;
