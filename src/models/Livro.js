@@ -1,13 +1,11 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
-import { autorSchema } from "./Autor.js";
 
 const livroSchema = new Schema({
   titulo: { type: String, required: true },
-  editora: String,
-  preco: Number,
-  paginas: Number,
-  autor: autorSchema
+  autor: {type: mongoose.Schema.Types.ObjectId, ref: "autores", required: true},
+  editora: {type: String, required: true},
+  numeroPaginas: {type: Number}
 });
 
 const Livro = mongoose.model("livros", livroSchema);
