@@ -1,17 +1,16 @@
-import mongoose from "mongoose";
 import Autor from "../models/Autor.js";
 
 class AutorController {
-  static async listarAutores(req, res) {
+  static async listarAutores(req, res, next) {
     try {
       const listaAutores = await Autor.find();
       res.status(200).json(listaAutores);
-    } catch (error) {
-      res.status(500).json({ message: "Erro interno no servidor" });
+    } catch (erro) {
+      next(erro);
     }
   }
 
-  static listarAutorPorId = async (req, res) => {
+  static listarAutorPorId = async (req, res, next) => {
     try {
       const id = req.params.id;
 
@@ -23,15 +22,11 @@ class AutorController {
         res.status(404).send({message: "Id do Autor não localizado."});
       }
     } catch (erro) {
-      if (erro instanceof mongoose.Error.CastError) {
-        res.status(400).send({message: "Um ou mais dados fornecidos estão incorretos."});
-      } else {
-        res.status(500).send({message: "Erro interno de servidor."});
-      }
+      next(erro);
     }
   };
 
-  static async cadastrarAutor(req, res) {
+  static cadastrarAutor = async (req, res, next) => {
     try {
       let autor = new Autor(req.body);
 
@@ -39,11 +34,11 @@ class AutorController {
 
       res.status(201).send(autorResultado.toJSON());
     } catch (erro) {
-      res.status(500).send({message: `${erro.message} - falha ao cadastrar Autor.`});
+      next(erro);
     }
-  }
+  };
 
-  static async atualizarAutor(req, res) {
+  static atualizarAutor = async (req, res, next) => {
     try {
       const id = req.params.id;
 
@@ -51,11 +46,11 @@ class AutorController {
 
       res.status(200).send({message: "Autor atualizado com sucesso"});
     } catch (erro) {
-      res.status(500).send({message: erro.message});
+      next(erro);
     }
-  }
+  };
 
-  static async excluirAutor(req, res) {
+  static excluirAutor = async (req, res, next) => {
     try {
       const id = req.params.id;
 
@@ -63,9 +58,9 @@ class AutorController {
 
       res.status(200).send({message: "Autor removido com sucesso"});
     } catch (erro) {
-      res.status(500).send({message: erro.message});
+      next(erro);
     }
-  }
+  };
 }
 
 export default AutorController;
