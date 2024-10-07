@@ -2,7 +2,10 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const autorSchema = new Schema({
-  nome: { type: String, required: true },
+  nome: {
+    type: String,
+    required: [true, "O nome do(a) autor é obrigatório"]
+  },
   nacionalidade: String,
 });
 
