@@ -1,4 +1,5 @@
 import Autor from "../models/Autor.js";
+import NaoEncontrado from "../errors/NaoEncontrado.js";
 
 class AutorController {
   static async listarAutores(req, res, next) {
@@ -19,7 +20,7 @@ class AutorController {
       if (autorResultado !== null) {
         res.status(200).send(autorResultado);
       } else {
-        res.status(404).send({message: "Id do Autor não localizado."});
+        next(new NaoEncontrado("Id do Autor não localizado."));
       }
     } catch (erro) {
       next(erro);
