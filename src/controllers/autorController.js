@@ -2,14 +2,15 @@ import { Autor } from "../models/index.js";
 import NaoEncontrado from "../errors/NaoEncontrado.js";
 
 class AutorController {
-  static async listarAutores(req, res, next) {
+  static listarAutores = async (req, res, next) => {
     try {
-      const listaAutores = await Autor.find();
-      res.status(200).json(listaAutores);
+      const listaAutores = Autor.find();
+      req.resultado = listaAutores;
+      next();
     } catch (erro) {
       next(erro);
     }
-  }
+  };
 
   static listarAutorPorId = async (req, res, next) => {
     try {
